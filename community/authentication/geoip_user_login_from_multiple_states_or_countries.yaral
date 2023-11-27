@@ -32,11 +32,10 @@ rule geoip_user_login_from_multiple_states_or_countries {
 
     $login.principal.ip_geo_artifact.location.country_or_region = $country
     $login.principal.ip_geo_artifact.location.state  = $state
-    $login.metadata.product_name = $product
     $login.target.user.userid = $user
 
   match:
-    $user, $product over 1h
+    $user over 1h
 
   outcome:
     $risk_score = max(35)
